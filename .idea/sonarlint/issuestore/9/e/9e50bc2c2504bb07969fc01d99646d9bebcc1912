@@ -1,0 +1,9 @@
+
+
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(”•ó–8Â“¿æ1
+
+java:S1319"mThe type of "allFabricants" should be an interface such as "List" rather than the implementation "ArrayList".(¨À¾‡üÿÿÿÿ8Ä“¿æ1
+Q
+java:S1948"/Make "allFabricants" transient or serializable.(ÂÌù‚ÿÿÿÿÿ8Î“¿æ1
+g
+java:S1128"ERemove this unused import 'jakarta.enterprise.context.SessionScoped'.(“¿êşÿÿÿÿ8Ø“¿æ1

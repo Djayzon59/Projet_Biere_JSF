@@ -1,0 +1,13 @@
+body{
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+    background: url("https://th.bing.com/th/id/R.79d06bd394f01dfa84e22778492b1e5e?rik=6o%2fnvsssZy%2fskw&riu=http%3a%2f%2fwww.maximumwall.com%2fwp-content%2fuploads%2f2015%2f07%2ffonds-ecran-apple-15.jpg&ehk=1vpsjfo4o3g5w4cEOjMaaYTEt5571gAswQmOdLz2r8s%3d&risl=&pid=ImgRaw&r=0") no-repeat center fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+#header {
+    margin-bottom: 10%;
+}

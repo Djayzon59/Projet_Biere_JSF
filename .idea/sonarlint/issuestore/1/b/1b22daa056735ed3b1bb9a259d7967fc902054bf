@@ -1,0 +1,17 @@
+
+Œ
+java:S1319@"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Ü²÷8ãúË˜1
+Š
+java:S1319D"hThe type of "allTypes" should be an interface such as "List" rather than the implementation "ArrayList".(Ù¶©–ıÿÿÿÿ8äúË˜1
+P
+java:S1948"3Make "typeBiereSelected" transient or serializable.(İ€¾¡8ûË˜1
+S
+java:S2696"6Make the enclosing method "static" or remove this set.(‘Š¹Ã8—ûË˜1
+N
+java:S11726",Remove this unused method parameter "event".(Î´Ûûÿÿÿÿ8«ûË˜1
+Z	java:S1067"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8­ûË˜1
+g
+java:S1128"ERemove this unused import 'jakarta.enterprise.context.SessionScoped'.(“¿êşÿÿÿÿ8·ûË˜1
+L
+java:S1128
+"*Remove this unused import 'model.Couleur'.(ë¢—Ÿøÿÿÿÿ8¸ûË˜1

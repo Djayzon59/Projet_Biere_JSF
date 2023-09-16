@@ -1,0 +1,9 @@
+
+’
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ΔΜ§κώÿÿÿÿ8Υ¤ε1
+
+java:S1319"mThe type of "allContinents" should be an interface such as "List" rather than the implementation "ArrayList".(Χ¥ώÿÿÿÿÿ8Υ¤ε1
+Q
+java:S1948"/Make "allContinents" transient or serializable.(Κ±Π όÿÿÿÿ8—Υ¤ε1
+g
+java:S1128"ERemove this unused import 'jakarta.enterprise.context.SessionScoped'.(“Ώκώÿÿÿÿ8›Υ¤ε1

@@ -1,0 +1,10 @@
+
+’
+java:S1319@"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(©Öôƒúÿÿÿÿ8Û¨Ë˜1
+
+java:S1319D"kThe type of "allCouleurs" should be an interface such as "List" rather than the implementation "ArrayList".(Ÿíƒ úÿÿÿÿ8Ü¨Ë˜1
+N
+java:S1948"1Make "couleurSelected" transient or serializable.(©±×Ğ8‡©Ë˜1
+N
+java:S11725",Remove this unused method parameter "event".(Ï–´—ÿÿÿÿÿ8¡©Ë˜1
+Z	java:S1066"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8¢©Ë˜1

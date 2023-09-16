@@ -1,0 +1,30 @@
+
+
+java:S1319R"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(´à½ã8Üï±¼1
+…
+java:S1319V"iThe type of "allMarque" should be an interface such as "List" rather than the implementation "ArrayList".(³¬¦
+8ßï±¼1
+’
+java:S1319b"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ößæùÿÿÿÿ8ßï±¼1
+†
+java:S1319f"iThe type of "listePays" should be an interface such as "List" rather than the implementation "ArrayList".(ŸÖÖó8àï±¼1
+
+java:S1319j"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÀÉ¨Ò8áï±¼1
+Œ
+java:S1319n"oThe type of "listeFabricants" should be an interface such as "List" rather than the implementation "ArrayList".(½‡©¾8áï±¼1
+M
+java:S1948!"+Make "allMarque" transient or serializable.(Œ¹õëşÿÿÿÿ8’ğ±¼1
+R
+java:S1948""0Make "marqueSelected" transient or serializable.(õÆá²ÿÿÿÿÿ8’ğ±¼1
+M
+java:S1948#"+Make "listePays" transient or serializable.(¢§½üÿÿÿÿ8“ğ±¼1
+M
+java:S1948$"1Make "listeFabricants" transient or serializable.(¢€I8“ğ±¼1
+I
+java:S1172H",Remove this unused method parameter "event".(¯œ·8ºğ±¼1
+g
+java:S1128"ERemove this unused import 'jakarta.enterprise.context.SessionScoped'.(“¿êşÿÿÿÿ8Æğ±¼1
+c
+java:S1128"ARemove this unused import 'jakarta.faces.event.ValueChangeEvent'.(àÒªıÿÿÿÿ8Æğ±¼1
+f
+java:S1128	"DRemove this unused import 'jakarta.faces.event.ValueChangeListener'.(ÌÌÓüÿÿÿÿ8Æğ±¼1

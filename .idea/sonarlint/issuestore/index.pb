@@ -1,0 +1,61 @@
+
+P
+ src/main/webapp/faces/type.xhtml,0\4\04cc541eab671e50a4969c3e1e52e6a684cb142f
+Q
+!src/main/webapp/WEB-INF/beans.xml,8\3\83008b1a88ba03a2548bb5b9ad0768c6c307d36c
+S
+#src/main/java/dao/ContinentDAO.java,4\f\4f54f32c189406691b949a6234536e3b13a1d6fa
+N
+src/main/java/dao/TypeDAO.java,3\3\3306ee9fe69249cc6dcc10ef92df79845aef0dbb
+Z
+*src/main/webapp/faces/template/pieds.xhtml,e\d\ed7ccd909d75f682a1b6aadc5708cf37d1f87068
+R
+"src/main/webapp/faces/marque.xhtml,f\3\f30e1d82c13d0de1d6df16ebdbdf6e8bca58fb89
+\
+,src/main/java/converter/MarqueConverter.java,1\3\13e2da83c807e65a05b37eb6e943a68b180a136e
+Z
+*src/main/java/converter/PaysConverter.java,9\2\92d3d4bc5ccfe470d1879dd4b755422ffe283bb3
+Z
+*src/main/java/converter/TypeConverter.java,d\3\d3d4ca183dcf39d1c9451b71acb32ef66fbf0bbc
+_
+/src/main/java/converter/FabricantConverter.java,2\e\2e392c03b990d802412a69714310b74dcad03ffa
+]
+-src/main/java/converter/CouleurConverter.java,1\d\1d70c16d3bc58f0c2429e9ae14a3f3444be45c51
+P
+ src/main/webapp/faces/pays.xhtml,8\e\8e00c6265ec360a93b4e999d8b93728c91903c8e
+\
+,src/main/webapp/faces/template/contenu.xhtml,b\5\b5b0cec2e198e16784114a3122034b9a40092c02
+Y
+)src/main/webapp/faces/template/menu.xhtml,8\e\8e7ff85451b4bcb06c96918162684c4f484ca643
+[
++src/main/webapp/faces/template/layout.xhtml,8\4\84b5db71e1e19b75b892b6f91425a4d1c96ae619
+W
+'src/main/webapp/resources/css/style.css,7\9\793286005b9090bf4b63c9281f5cbde07930695e
+U
+%src/main/java/bean/ContinentBean.java,d\1\d16ff89980bc19ed95d454581314a779c58326ca
+U
+%src/main/java/bean/FabricantBean.java,9\e\9e50bc2c2504bb07969fc01d99646d9bebcc1912
+R
+"src/main/java/bean/MarqueBean.java,b\e\bec99ba6e233cde8105792ef59319996266fe417
+P
+ src/main/java/bean/PaysBean.java,5\2\5212ef89a84fd923075fd36119b8e8e6e55dd8fa
+P
+ src/main/java/bean/TypeBean.java,1\b\1b22daa056735ed3b1bb9a259d7967fc902054bf
+S
+#src/main/java/bean/CouleurBean.java,0\f\0f03bbd70cbe3186a023a535e8b9745685145c81
+N
+src/main/java/dao/PaysDAO.java,1\7\174ff624fb4b7f66fb1be56e104f54bfec5cb428
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+Y
+)src/main/webapp/faces/articleSearch.xhtml,5\3\53c710ab97de4b4df02ad29d00acbded9dcf69ef
+P
+ src/main/java/dao/MarqueDAO.java,f\3\f3b0017a29ef563443209aef56bdc1cfd562c499
+Q
+!src/main/java/dao/CouleurDAO.java,5\f\5f802f9da7d152cb5d086541466ec1e6d69d3f96
+R
+"src/main/java/dao/SDBMConnect.java,8\f\8f8db587a515127fbf91cffa58252296a306ef74
+S
+#src/main/webapp/faces/article.xhtml,2\b\2ba953ae4a8d2d2cd6eff03d2ba91115cf1dcce7
+S
+#src/main/webapp/faces/couleur.xhtml,2\1\215a156099f1df518587b06e62f33e7346f6e06b

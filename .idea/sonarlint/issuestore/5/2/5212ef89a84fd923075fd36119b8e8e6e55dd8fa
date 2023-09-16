@@ -1,0 +1,19 @@
+
+Œ
+java:S1319F"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ñ·°y8¦î1
+„
+java:S1319J"gThe type of "allPays" should be an interface such as "List" rather than the implementation "ArrayList".(•š™ı8§î1
+’
+java:S1319V"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÄÌ§êşÿÿÿÿ8§î1
+
+java:S1319Z"mThe type of "allContinents" should be an interface such as "List" rather than the implementation "ArrayList".(×¥˜şÿÿÿÿÿ8§î1
+K
+java:S1948")Make "allPays" transient or serializable.(­Ï™ıÿÿÿÿ8Áî1
+P
+java:S1948".Make "paysSelected" transient or serializable.(šÀ‹øÿÿÿÿ8Âî1
+Q
+java:S1948"/Make "allContinents" transient or serializable.(Ê±Ğ üÿÿÿÿ8Äî1
+N
+java:S1172>",Remove this unused method parameter "event".(Ï–´—ÿÿÿÿÿ8Óî1
+g
+java:S1128"ERemove this unused import 'jakarta.enterprise.context.SessionScoped'.(“¿êşÿÿÿÿ8Øî1

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+
+
+        <ui:composition template="template/layout.xhtml"
+                        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                        xmlns:f="http://xmlns.jcp.org/jsf/core"
+                        xmlns:p="http://primefaces.org/ui">
+            <ui:define name="contenu">
+
+
+                <h:form id="form">
+
+                    <p:growl id="id-message"
+                             life="2000"
+                             skipDetailIfEqualsSummary="true"
+                             showDetail="true"/>
+
+
+                    <div class="border-round flex align-items-center justify-content-center">
+                        <p:inputText placeholder="libelle" styleClass="inputRecherche"
+                                     value="#{articleSearchBean.articleSearch.libelle}"/>
+                    </div>
+
+                    <div class="card">
+                        <div class="flex flex-wrap justify-content-center md:flex-row card-container">
+
+                            <div class="border-round flex align-items-center justify-content-center w-15rem h-4rem ">
+                                <p:selectOneMenu id="continent" value="#{articleSearchBean.articleSearch.continent}">
+                                    <f:selectItems value="#{articleSearchBean.allContinents}"/>
+                                    <f:converter converterId="continentConverter"/>
+                                    <p:ajax listener="#{articleSearchBean.paysToChanged}" update="pays"/>
+                                </p:selectOneMenu>
+                            </div>
+
+
+                            <div class="border-500 border-round flex align-items-center justify-content-center w-15rem h-4rem">
+                                <p:selectOneMenu id="pays" value="#{articleSearchBean.articleSearch.pays}">
+                                    <f:selectItems value="#{articleSearchBean.allPays}"/>
+                                    <f:converter converterId="paysConverter"/>
+                                </p:selectOneMenu>
+                            </div>
+
+                            <div class="border-500 border-round flex align-items-center justify-content-center w-15rem h-4rem">
+                                <p:selectOneMenu id="couleur" value="#{articleSearchBean.articleSearch.couleur}">
+                                    <f:selectItems value="#{articleSearchBean.allCouleurs}"/>
+                                    <f:converter converterId="couleurConverter"/>
+                                </p:selectOneMenu>
+                            </div>
+
+                            <div class="border-500 border-round flex align-items-center justify-content-center w-15rem h-4rem">
+                                <p:selectOneMenu id="marque" value="#{articleSearchBean.articleSearch.marque}">
+                                    <f:selectItems value="#{articleSearchBean.allMarques}"/>
+                                    <f:converter converterId="marqueConverter"/>
+                                </p:selectOneMenu>
+                            </div>
+
+                            <div class="border-500 border-round flex align-items-center justify-content-center w-15rem h-4rem">
+                                <p:selectOneMenu id="type" value="#{articleSearchBean.articleSearch.typeBiere}">
+                                    <f:selectItems value="#{articleSearchBean.allTypes}"/>
+                                    <f:converter converterId="typeConverter"/>
+                                </p:selectOneMenu>
+                            </div>
+
+                            <div class="border-500 border-round flex align-items-center justify-content-center w-15rem h-4rem">
+                                <p:selectOneMenu id="fabric" value="#{articleSearchBean.articleSearch.fabricant}">
+                                    <f:selectItems value="#{articleSearchBean.allFabricants}"/>
+                                    <f:converter converterId="fabricantConverter"/>
+                                </p:selectOneMenu>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex align-items-center justify-content-center">
+
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <h:outputText id="displayRange" value="Entre #{0}° et #{30}°"/>
+                            <p:slider for="txt6,txt7" display="displayRange" maxValue="30" style="width: 400px"
+                                      range="true"
+                                      displayTemplate="Entre {min}° et {max}°"/>
+                        </h:panelGrid>
+                        <h:inputHidden id="txt6" value="#{articleSearchBean.articleSearch.titrageMin}"/>
+                        <h:inputHidden id="txt7" value="#{articleSearchBean.articleSearch.titrageMax}"/>
+
+                    </div>
+
+                    <div class="flex flex-wrap align-items-center justify-content-center card-container blue-container">
+                        <p:commandButton value="Rechercher"
+                                         icon="pi pi-download"
+                                         actionListener="#{articleSearchBean.chercher}"
+                                         update="datatable-article"
+                                         class=" flex align-items-center justify-content-center
+                                            font-bold bg-blue-500 text-white border-round m-2 px-2 py-1"/>
+                    </div>
+
+
+                    <div class="h-auto opacity-70 justify-content-center mx-6">
+                        <p:toolbar>
+                            <p:toolbarGroup>
+                                <p:commandButton style="margin-right: .5rem"
+                                                 styleClass="ui-button-succes"
+                                                 oncomplete="PF('widgetGererArticle').show()"
+                                                 update=":dialogs:panel-gestion-article"
+                                                 actionListener="#{articleSearchBean.newArticle()}"
+                                                 icon="pi pi-plus"
+                                                 value="ADD Article">
+                                    <p:resetInput target=":dialogs:panel-gestion-article"/>
+                                </p:commandButton>
+                                <p:commandButton
+                                        id="id_bouton_delete"
+                                        oncomplete="PF('widgetSupprimerArticle').show()"
+                                        icon="pi pi-trash"
+                                        process="@this"
+                                        class="ui-button-warning rounded-button">
+                                </p:commandButton>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+
+                        <p:dataTable id="datatable-article"
+                                     paginatorPosition="bottom"
+                                     rows="7"
+                                     paginator="true"
+                                     var="article"
+                                     selectionMode="single"
+                                     selection="#{articleSearchBean.articleSelected}"
+                                     rowKey="#{article.id}"
+                                     value="#{articleSearchBean.allArticles}"
+                                     size="small">
+
+                            <p:ajax event="rowSelect"
+                                    listener="#{articleSearchBean.onRowSelect}"
+                                    update=":form:id-message :form:id_bouton_delete :dialogs:confirmer-supprimer-article"/>
+
+                            <p:column headerText="Id article" responsivePriority="1">
+                                <h:outputText value="#{article.id}"/>
+                            </p:column>
+                            <p:column headerText="Nom article" responsivePriority="2">
+                                <h:outputText value="#{article.libelle}"/>
+                            </p:column>
+                            <p:column headerText="prix" responsivePriority="3">
+                                <h:outputText value="#{article.prixAchat}"/>
+                            </p:column>
+                            <p:column headerText="volume" responsivePriority="4">
+                                <h:outputText value="#{article.volume}"/>
+                            </p:column>
+                            <p:column headerText="titrage" responsivePriority="4">
+                                <h:outputText value="#{article.titrage}"/>
+                            </p:column>
+                            <p:column headerText="Type" responsivePriority="5">
+                                <h:outputText value="#{article.type}"/>
+                            </p:column>
+                            <p:column headerText="Couleur" responsivePriority="6">
+                                <h:outputText value="#{article.couleur}"/>
+                            </p:column>
+                            <p:column headerText="Marque" responsivePriority="7">
+                                <h:outputText value="#{article.marque}"/>
+                            </p:column>
+                            <p:column headerText="Continent" responsivePriority="8">
+                                <h:outputText value="#{article.marque.pays.continent}"/>
+                            </p:column>
+                            <p:column headerText="Pays" responsivePriority="9">
+                                <h:outputText value="#{article.marque.pays}"/>
+                            </p:column>
+                            <p:column headerText="Fabricant" responsivePriority="10">
+                                <h:outputText value="#{article.marque.fabricant}"/>
+                            </p:column>
+
+                            <p:column exportable="false">
+                                <p:commandButton icon="pi pi-pencil" update=":dialogs:panel-gestion-article"
+                                                 oncomplete="PF('widgetGererArticle').show()"
+                                                 styleClass="edit-button rounded-button ui-button-success"
+                                                 process="@this">
+                                    <f:setPropertyActionListener value="#{article}"
+                                                                 target="#{articleSearchBean.articleSelected}"/>
+                                    <p:resetInput target=":dialogs:panel-gestion-article"/>
+                                </p:commandButton>
+                                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
+                                                 update=":dialogs:confirmer-supprimer-article"
+                                                 oncomplete="PF('widgetSupprimerArticle').show()">
+                                    <f:setPropertyActionListener value="#{article}"
+                                                                 target="#{articleSearchBean.articleSelected}"/>
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                    </div>
+                </h:form>
+
+                <h:form id="dialogs">
+                    <p:dialog header="Article Details" showEffect="fade" modal="true" widgetVar="widgetGererArticle"
+                              responsive="true" height="300" blockScroll="true">
+                        <p:outputPanel id="panel-gestion-article" class="ui-fluid">
+                            <p:outputPanel rendered="#{not empty articleSearchBean.articleSelected}">
+
+                                <div class="field">
+                                    <p:outputLabel for="id">Id</p:outputLabel>
+                                    <p:inputText id="id" value="#{articleSearchBean.articleSelected.id}"
+                                                 disabled="true"/>
+                                </div>
+
+                                <div class="field">
+                                    <p:outputLabel for="libelle">Libellé</p:outputLabel>
+                                    <p:inputTextarea id="libelle" value="#{articleSearchBean.articleSelected.libelle}"
+                                                     required="true"/>
+                                </div>
+
+                                <div class="field">
+                                    <p:outputLabel for="prix">Prix</p:outputLabel>
+                                    <p:inputTextarea id="prix" value="#{articleSearchBean.articleSelected.prixAchat}"
+                                                     required="true"/>
+                                </div>
+
+                                <div class="field">
+                                    <p:outputLabel for="volume">Volume</p:outputLabel>
+                                    <p:inputTextarea id="volume" value="#{articleSearchBean.articleSelected.volume}"/>
+                                </div>
+
+                                <div class="field">
+                                    <p:outputLabel for="titrage">Titrage</p:outputLabel>
+                                    <p:inputTextarea id="titrage" value="#{articleSearchBean.articleSelected.titrage}"/>
+                                </div>
+
+                                <div class="field">
+                                    <p:outputLabel for="marques">Marque</p:outputLabel>
+                                    <p:selectOneMenu id="marques"
+                                                     value="#{articleSearchBean.articleSelected.marque}"
+                                                     required="true">
+                                        <f:selectItems value="#{articleSearchBean.allMarques}"/>
+                                        <f:converter converterId="marqueConverter"/>
+                                    </p:selectOneMenu>
+                                </div>
+
+                                <div class="field">
+                                    <p:outputLabel for="couleurs">Couleur</p:outputLabel>
+                                    <p:selectOneMenu id="couleurs"
+                                                     value="#{articleSearchBean.articleSelected.couleur}">
+                                        <f:selectItems value="#{articleSearchBean.allCouleurs}"/>
+                                        <f:converter converterId="couleurConverter"/>
+                                    </p:selectOneMenu>
+                                </div>
+
+                                <div class="field">
+                                    <p:outputLabel for="types">Type</p:outputLabel>
+                                    <p:selectOneMenu id="types"
+                                                     value="#{articleSearchBean.articleSelected.type}">
+                                        <f:selectItems value="#{articleSearchBean.allTypes}"/>
+                                        <f:converter converterId="typeConverter"/>
+                                    </p:selectOneMenu>
+                                </div>
+
+
+                            </p:outputPanel>
+                        </p:outputPanel>
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Save" icon="pi pi-check"
+                                             actionListener="#{articleSearchBean.saveArticle}"
+                                             update="panel-gestion-article" process="panel-gestion-article @this"/>
+                            <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('widgetGererArticle').hide()"
+                                             class="ui-button-secondary" type="button"/>
+                        </f:facet>
+                    </p:dialog>
+
+                    <p:confirmDialog id="confirmer-supprimer-article" widgetVar="widgetSupprimerArticle"
+                                     showEffect="fade"
+                                     width="300"
+                                     message="Supprimer l'article #{articleSearchBean.articleSelected} ?"
+                                     header="Confirmation"
+                                     severity="warn">
+                        <p:commandButton value="Yes" icon="pi pi-check"
+                                         actionListener="#{articleSearchBean.deleteArticle}"
+                                         process="@this"
+                                         oncomplete="PF('widgetSupprimerArticle').hide()"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                         onclick="PF('widgetSupprimerArticle').hide()"/>
+                    </p:confirmDialog>
+
+                    <p:confirmDialog global="true" showEffect="fade" width="300">
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
+                                         icon="pi pi-check"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                         icon="pi pi-times"/>
+                    </p:confirmDialog>
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+
+
+</f:view>
+</html>

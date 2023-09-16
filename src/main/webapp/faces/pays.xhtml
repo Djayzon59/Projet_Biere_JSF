@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+   <ui:composition template="template/layout.xhtml"
+                   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                   xmlns:f="http://xmlns.jcp.org/jsf/core"
+                   xmlns:p="http://primefaces.org/ui">
+      <ui:define name="contenu">
+         <h:form id="form">
+            <p:growl id="id-message"
+                     life="2000"
+                     skipDetailIfEqualsSummary="true"
+                     showDetail="true"/>
+
+            <p:toolbar>
+               <p:toolbarGroup>
+                  <p:commandButton style="margin-right: .5rem"
+                                   styleClass="ui-button-succes"
+                                   oncomplete="PF('widgetGererPays').show()"
+                                   update=":dialogs:panel-gestion-pays"
+                                   actionListener="#{paysBean.newPays()}"
+                                   icon="pi pi-plus"
+                                   value="ADD Country">
+                     <p:resetInput target=":dialogs:panel-gestion-pays"/>
+                  </p:commandButton>
+                  <p:commandButton
+                          disabled="#{paysBean.paysSelected == null || paysBean.paysSelected.nombreMarques > 0}"
+                          id="id_bouton_delete"
+                          oncomplete="PF('widgetSupprimerPays').show()"
+                          icon="pi pi-trash"
+                          process="@this"
+                          class="ui-button-warning rounded-button">
+                  </p:commandButton>
+               </p:toolbarGroup>
+            </p:toolbar>
+
+            <div class="card">
+               <p:dataTable id="datatable-pays"
+                            var="pays"
+                            value="#{paysBean.allPays}"
+                            selectionMode="single"
+                            selection="#{paysBean.paysSelected}"
+                            rowKey="#{pays.id}"
+                            paginator="true"
+                            paginatorPosition="bottom"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                            rows="5">
+
+                  <p:ajax event="rowSelect"
+                          listener="#{paysBean.onRowSelect}"
+                          update=":form:id-message :form:id_bouton_delete :dialogs:confirmer-supprimer-pays"/>
+
+                  <p:column headerText="Code">
+                     <h:outputText value="#{pays.id}"/>
+                  </p:column>
+
+                  <p:column headerText="Name">
+                     <h:outputText value="#{pays.libelle}"/>
+                  </p:column>
+
+                  <p:column exportable="false">
+                     <p:commandButton icon="pi pi-pencil" update=":dialogs:panel-gestion-pays"
+                                      oncomplete="PF('widgetGererPays').show()"
+                                      styleClass="edit-button rounded-button ui-button-success" process="@this">
+                        <f:setPropertyActionListener value="#{pays}" target="#{paysBean.paysSelected}"/>
+                        <p:resetInput target=":dialogs:panel-gestion-pays"/>
+                     </p:commandButton>
+                     <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
+                                      update=":dialogs:confirmer-supprimer-pays"
+                                      oncomplete="PF('widgetSupprimerPays').show()"
+                                      disabled="#{pays.nombreMarques > 0}">
+                        <f:setPropertyActionListener value="#{pays}" target="#{paysBean.paysSelected}"/>
+                     </p:commandButton>
+                  </p:column>>
+               </p:dataTable>
+            </div>
+         </h:form>
+         <h:form id="dialogs">
+            <p:dialog header="Pays Details" showEffect="fade" modal="true" widgetVar="widgetGererPays"
+                      responsive="true">
+               <p:outputPanel id="panel-gestion-pays" class="ui-fluid">
+                  <p:outputPanel rendered="#{not empty paysBean.paysSelected}">
+
+                     <div class="field">
+                        <p:outputLabel for="id">Id</p:outputLabel>
+                        <p:inputText id="id" value="#{paysBean.paysSelected.id}" disabled="true"/>
+                     </div>
+                     <div class="field">
+                        <p:outputLabel for="libelle">Libellé</p:outputLabel>
+                        <p:inputTextarea id="libelle" value="#{paysBean.paysSelected.libelle}"/>
+                     </div>
+                     <div class="field">
+                        <p:outputLabel for="continent">Continent</p:outputLabel>
+                        <p:selectOneMenu id="continent"
+                                         value="#{paysBean.paysSelected.continent}"
+                                         required="true">
+                           <f:selectItems value="#{paysBean.allContinents}"/>
+                           <f:converter converterId="continentConverter"/>
+                        </p:selectOneMenu>
+                     </div>
+
+                  </p:outputPanel>
+               </p:outputPanel>
+
+               <f:facet name="footer">
+                  <p:commandButton value="Save" icon="pi pi-check" actionListener="#{paysBean.savePays()}"
+                                   update="panel-gestion-pays" process="panel-gestion-pays @this"/>
+                  <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('widgetGererPays').hide()"
+                                   class="ui-button-secondary" type="button"/>
+               </f:facet>
+            </p:dialog>
+
+            <p:confirmDialog id="confirmer-supprimer-pays" widgetVar="widgetSupprimerPays" showEffect="fade"
+                             width="300"
+                             message="Supprimer le pays #{paysBean.paysSelected} ?" header="Confirmation"
+                             severity="warn">
+               <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{paysBean.deletePays()}"
+                                process="@this"
+                                oncomplete="PF('widgetSupprimerPays').hide()"/>
+               <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                onclick="PF('widgetSupprimerPays').hide()"/>
+            </p:confirmDialog>
+
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+               <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+               <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                icon="pi pi-times"/>
+            </p:confirmDialog>
+         </h:form>
+
+      </ui:define>
+   </ui:composition>
+</f:view>
+</html>

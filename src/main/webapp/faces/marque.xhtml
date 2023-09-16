@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <ui:composition template="template/layout.xhtml"
+                    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                    xmlns:f="http://xmlns.jcp.org/jsf/core"
+                    xmlns:p="http://primefaces.org/ui">
+        <ui:define name="contenu">
+            <h:form id="form">
+                <p:growl id="id-message"
+                         life="2000"
+                         skipDetailIfEqualsSummary="true"
+                         showDetail="true"/>
+
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton style="margin-right: .5rem"
+                                         styleClass="ui-button-succes"
+                                         oncomplete="PF('widgetGererMarque').show()"
+                                         update=":dialogs:panel-gestion-marque"
+                                         actionListener="#{marqueBean.newMarque}"
+                                         icon="pi pi-plus"
+                                         value="ADD Marque">
+                            <p:resetInput target=":dialogs:panel-gestion-marque"/>
+                        </p:commandButton>
+                        <p:commandButton
+                                disabled="#{marqueBean.marqueSelected == null || marqueBean.marqueSelected.nombreArticles > 0}"
+                                id="id_bouton_delete"
+                                oncomplete="PF('widgetSupprimerMarque').show()"
+                                icon="pi pi-trash"
+                                process="@this"
+                                class="ui-button-warning rounded-button">
+                        </p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <div class="card">
+                    <p:dataTable id="datatable-marques"
+                                 var="marque"
+                                 value="#{marqueBean.allMarque}"
+                                 selectionMode="single"
+                                 selection="#{marqueBean.marqueSelected}"
+                                 rowKey="#{marque.id}"
+                                 paginator="true"
+                                 paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                 rows="8">
+
+                        <p:ajax event="rowSelect"
+                                listener="#{marqueBean.onRowSelect}"
+                                update=":form:id-message :form:id_bouton_delete :dialogs:confirmer-supprimer-marque"/>
+
+                        <p:column headerText="Code">
+                            <h:outputText value="#{marque.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Name">
+                            <h:outputText value="#{marque.libelle}"/>
+                        </p:column>
+
+
+                        <p:column exportable="false">
+                            <p:commandButton icon="pi pi-pencil" update=":dialogs:panel-gestion-marque"
+                                             oncomplete="PF('widgetGererMarque').show()"
+                                             styleClass="edit-button rounded-button ui-button-success" process="@this">
+                                <f:setPropertyActionListener value="#{marque}" target="#{marqueBean.marqueSelected}"/>
+                                <p:resetInput target=":dialogs:panel-gestion-marque"/>
+                            </p:commandButton>
+                            <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash"
+                                             update=":dialogs:confirmer-supprimer-marque"
+                                             oncomplete="PF('widgetSupprimerMarque').show()"
+                                             disabled="#{marque.nombreArticles > 0}">
+                                <f:setPropertyActionListener value="#{marque}" target="#{marqueBean.marqueSelected}"/>
+                            </p:commandButton>
+                        </p:column>>
+                    </p:dataTable>
+                </div>
+            </h:form>
+            <h:form id="dialogs">
+                <p:dialog header="Marque Details" showEffect="fade" modal="true" widgetVar="widgetGererMarque"
+                          responsive="true">
+                    <p:outputPanel id="panel-gestion-marque" class="ui-fluid">
+                        <p:outputPanel rendered="#{not empty marqueBean.marqueSelected}">
+
+                            <div class="field">
+                                <p:outputLabel for="id">Id</p:outputLabel>
+                                <p:inputText id="id" value="#{marqueBean.marqueSelected.id}" disabled="true"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="libelle">Libellé</p:outputLabel>
+                                <p:inputTextarea id="libelle" value="#{marqueBean.marqueSelected.libelle}"/>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="pays">Pays</p:outputLabel>
+                                <p:selectOneMenu id="pays"
+                                                 value="#{marqueBean.marqueSelected.pays}"
+                                                required="true">
+                                    <f:selectItems value="#{marqueBean.listePays}"/>
+                                    <f:converter converterId="paysConverter"/>
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="field">
+                                <p:outputLabel for="fabricant">Fabricant</p:outputLabel>
+                                <p:selectOneMenu id="fabricant"
+                                                 value="#{marqueBean.marqueSelected.fabricant}"
+                                                 required="true">
+                                    <f:selectItems value="#{marqueBean.listeFabricants}"/>
+                                    <f:converter converterId="fabricantConverter"/>
+                                </p:selectOneMenu>
+                            </div>
+
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Save" icon="pi pi-check" actionListener="#{marqueBean.saveMarque}"
+                                         update="panel-gestion-marque" process="panel-gestion-marque @this"/>
+                        <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('widgetGererMarque').hide()"
+                                         class="ui-button-secondary" type="button"/>
+                    </f:facet>
+                </p:dialog>
+
+                <p:confirmDialog id="confirmer-supprimer-marque" widgetVar="widgetSupprimerMarque" showEffect="fade"
+                                 width="300"
+                                 message="Supprimer la marque #{marqueBean.marqueSelected} ?" header="Confirmation"
+                                 severity="warn">
+                    <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{marqueBean.deleteMarque}"
+                                     process="@this"
+                                     oncomplete="PF('widgetSupprimerMarque').hide()"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                     onclick="PF('widgetSupprimerMarque').hide()"/>
+                </p:confirmDialog>
+
+                <p:confirmDialog global="true" showEffect="fade" width="300">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                     icon="pi pi-times"/>
+                </p:confirmDialog>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</f:view>
+</html>

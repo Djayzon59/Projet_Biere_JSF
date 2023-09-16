@@ -20,8 +20,8 @@ public class SDBMConnect {
                 ds.setDatabaseName("SDBM");
                 ds.setIntegratedSecurity(false);
                 ds.setEncrypt(false);
-                ds.setUser("sa");
-                ds.setPassword("azerty@123456");
+                ds.setUser("*****");
+                ds.setPassword("**********");
                 connexion = ds.getConnection();
             } catch (SQLServerException e) {
                 e.printStackTrace();

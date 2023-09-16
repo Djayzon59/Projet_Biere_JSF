@@ -1,12 +1,8 @@
 
 P
  src/main/webapp/faces/type.xhtml,0\4\04cc541eab671e50a4969c3e1e52e6a684cb142f
-Q
-!src/main/webapp/WEB-INF/beans.xml,8\3\83008b1a88ba03a2548bb5b9ad0768c6c307d36c
 S
 #src/main/java/dao/ContinentDAO.java,4\f\4f54f32c189406691b949a6234536e3b13a1d6fa
-N
-src/main/java/dao/TypeDAO.java,3\3\3306ee9fe69249cc6dcc10ef92df79845aef0dbb
 Z
 *src/main/webapp/faces/template/pieds.xhtml,e\d\ed7ccd909d75f682a1b6aadc5708cf37d1f87068
 R
@@ -29,8 +25,6 @@ Y
 )src/main/webapp/faces/template/menu.xhtml,8\e\8e7ff85451b4bcb06c96918162684c4f484ca643
 [
 +src/main/webapp/faces/template/layout.xhtml,8\4\84b5db71e1e19b75b892b6f91425a4d1c96ae619
-W
-'src/main/webapp/resources/css/style.css,7\9\793286005b9090bf4b63c9281f5cbde07930695e
 U
 %src/main/java/bean/ContinentBean.java,d\1\d16ff89980bc19ed95d454581314a779c58326ca
 U
@@ -45,17 +39,37 @@ S
 #src/main/java/bean/CouleurBean.java,0\f\0f03bbd70cbe3186a023a535e8b9745685145c81
 N
 src/main/java/dao/PaysDAO.java,1\7\174ff624fb4b7f66fb1be56e104f54bfec5cb428
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 Y
 )src/main/webapp/faces/articleSearch.xhtml,5\3\53c710ab97de4b4df02ad29d00acbded9dcf69ef
 P
  src/main/java/dao/MarqueDAO.java,f\3\f3b0017a29ef563443209aef56bdc1cfd562c499
 Q
 !src/main/java/dao/CouleurDAO.java,5\f\5f802f9da7d152cb5d086541466ec1e6d69d3f96
-R
-"src/main/java/dao/SDBMConnect.java,8\f\8f8db587a515127fbf91cffa58252296a306ef74
 S
 #src/main/webapp/faces/article.xhtml,2\b\2ba953ae4a8d2d2cd6eff03d2ba91115cf1dcce7
 S
 #src/main/webapp/faces/couleur.xhtml,2\1\215a156099f1df518587b06e62f33e7346f6e06b
+_
+/src/main/java/converter/ContinentConverter.java,d\0\d01b10c532b369d5ee7a198e2d8bfa43eb7cf282
+P
+ src/main/java/model/Article.java,9\9\99f4ea86658401191d1286ffc77aba6f6db602b1
+V
+&src/main/java/model/ArticleSearch.java,0\c\0c75e530cc3348054c2e9f94fbb163cf16ee41e1
+R
+"src/main/java/model/Continent.java,1\c\1c0186baa1882a3614477bd3c37a15d5628ad915
+R
+"src/main/java/model/Fabricant.java,1\e\1e1ddda0e2aaf60a05a45b4b19c99380f22f7864
+P
+ src/main/java/model/Couleur.java,f\e\fe596a130e7daa9ce84ada94e864b6d40d007cce
+O
+src/main/java/model/Marque.java,8\6\864206289d69aa3a9667f980cf824aa5da29bca7
+M
+src/main/java/model/Pays.java,e\4\e4e5716cfcaf00ceb05ed0b2622fa77c29520c73
+R
+"src/main/java/model/TypeBiere.java,b\8\b89de6422ea988bdf0c3c3a70b0bf000261df7d0
+Q
+!src/main/java/dao/ArticleDAO.java,6\7\67eca5699cb8ce1b744bcb3cf1df2b9b49e9a6b2
+Q
+!src/main/java/dao/DAOFactory.java,7\b\7bae2125bb1ee78bacc7711874889c742b1e6274
+S
+#src/main/java/dao/FabricantDAO.java,7\c\7cddfe7c864063e36ac95587c8e6893189ff86ce
